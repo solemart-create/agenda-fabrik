@@ -60,7 +60,7 @@ for (const url of aRevisar) {
   const datos = {
     id: ev.id, titulo: ev.titulo, fecha: ev.fecha, hora: ev.hora, horaFin: ev.horaFin,
     lugar: ev.lugar || "FABRIK", direccion: ev.direccion, categoria: ev.categoria, edad: ev.edad,
-    imagen: ev.imagen, entradas: url,
+    imagen: ev.imagen, entradas: url, cancelado: ev.cancelado || undefined,
   };
   const existente = eventos.find(e => e.id === ev.id || e.entradas === url);
   if (!existente) {

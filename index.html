@@ -84,6 +84,11 @@ h1{margin:6px 0 0;font-stretch:125%;font-weight:800;font-size:clamp(44px,9vw,84p
 .fila .t{font-stretch:110%;font-weight:700;text-transform:uppercase;font-size:15px;overflow-wrap:anywhere;min-width:0}
 .fila .h{font-family:var(--mono);font-size:12px;color:var(--gris)}
 .fila.pasado{opacity:.45}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:1px solid currentColor;padding:1px 6px;margin-left:8px;vertical-align:2px;color:var(--gris)}
+.fila.cancelado .t>span:first-child{text-decoration:line-through;text-decoration-thickness:1px}
+.ev.cancelado{background:transparent;border:1px solid var(--rojo-oscuro);color:var(--gris);text-decoration:line-through}
+.sello{align-self:flex-start;font-stretch:125%;font-weight:800;font-size:13px;letter-spacing:.2em;text-transform:uppercase;border:2px solid var(--blanco);padding:4px 10px;transform:rotate(-3deg)}
+.cred.cancelado{filter:saturate(.35)}
 .vacio{color:var(--gris);padding:18px 4px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
 @media (max-width:520px){.fila{grid-template-columns:70px 1fr}.fila .h{grid-column:2}}
 
@@ -180,12 +185,13 @@ const horario=e=>e.hora?(e.horaFin?e.hora+" a "+e.horaFin:e.hora)+" h":"A confir
 let eventos=[], vista=new Date(); vista.setDate(1);
 
 function abrir(ev){
-  const c=$("cred"); c.replaceChildren(); c.className="cred"+(ev.imagen?"":" sin-foto");
+  const c=$("cred"); c.replaceChildren(); c.className="cred"+(ev.imagen?"":" sin-foto")+(ev.cancelado?" cancelado":"");
   const x=el("button","cerrar","×"); x.type="button"; x.setAttribute("aria-label","Cerrar"); x.onclick=cerrar; c.append(x);
   c.append(el("div","ranura"));
   const tope=el("div","tope"); tope.append(el("span",null,"Acceso · "+(ev.categoria||"Evento")),el("span",null,ev.edad||"")); c.append(tope);
   if(ev.imagen){const i=el("img","foto");i.src=ev.imagen;i.alt="";i.loading="lazy";i.onerror=()=>{i.remove();c.classList.add("sin-foto")};c.append(i)}
   const b=el("div","cuerpo");
+  if(ev.cancelado)b.append(el("span","sello","Cancelada"));
   const h=el("h3",null,ev.titulo||"Evento"); h.id="cred-titulo"; b.append(h);
   const d=el("div","datos");
   const par=(k,v,ancho)=>{const w=el("div",ancho?"ancho":null);w.append(el("div","k",k),el("div","v",v));d.append(w)};
@@ -195,7 +201,7 @@ function abrir(ev){
   b.append(d);
   if(ev.notas)b.append(el("p","notas",ev.notas));
   const ac=el("div","acciones");
-  if(ev.entradas){const a=el("a","boton");a.href=ev.entradas;a.target="_blank";a.rel="noopener";a.append(el("span",null,"Comprar entradas"),el("span",null,"↗"));ac.append(a)}
+  if(ev.entradas&&!ev.cancelado){const a=el("a","boton");a.href=ev.entradas;a.target="_blank";a.rel="noopener";a.append(el("span",null,"Comprar entradas"),el("span",null,"↗"));ac.append(a)}
   for(const o of (ev.otros||[])){if(!o.url)continue;const a=el("a","boton sec");a.href=o.url;a.target="_blank";a.rel="noopener";a.append(el("span",null,o.nombre||"Ver publicación"),el("span",null,"↗"));ac.append(a)}
   const mapa=el("a","boton sec");mapa.href="https://www.google.com/maps/place/FABRIK/@-34.843256,-55.9991634,17z";mapa.target="_blank";mapa.rel="noopener";mapa.append(el("span",null,"Cómo llegar"),el("span",null,"↗"));ac.append(mapa);
   b.append(ac);
@@ -223,25 +229,25 @@ function pintarCal(){
     c.append(el("span","n",f.getDate()));
     const del=eventos.filter(e=>e.fecha===iso);
     if(del.length){c.classList.add("con");c.onclick=ev=>{if(ev.target===c||ev.target.className==="n")abrir(del[0])}}
-    for(const e of del){const b=el("button","ev");b.type="button";b.setAttribute("aria-label",e.titulo+", "+fechaLinda(iso));
+    for(const e of del){const b=el("button","ev"+(e.cancelado?" cancelado":""));b.type="button";b.setAttribute("aria-label",e.titulo+", "+fechaLinda(iso));
       if(e.hora)b.append(el("small",null,e.hora));b.append(document.createTextNode(e.titulo));b.onclick=()=>abrir(e);c.append(b)}
     g.append(c);
   }
 }
 function pintarLista(){
   const l=$("lista");l.replaceChildren();const hoy=hoyISO();
-  const prox=eventos.filter(e=>!e.fecha||e.fecha>=hoy), pas=eventos.filter(e=>e.fecha&&e.fecha<hoy).reverse();
+  const prox=eventos.filter(e=>!e.fecha||e.fecha>=hoy);
   if(!eventos.length){l.append(el("div","vacio","Todavía no hay eventos publicados."));return}
   if(!prox.length)l.append(el("div","vacio","No hay fechas próximas publicadas. Cuando aparezca una, la vas a ver acá."));
-  for(const e of [...prox,...pas]){
-    const r=el("button","fila"+(e.fecha&&e.fecha<hoy?" pasado":""));r.type="button";
+  for(const e of eventos){
+    const r=el("button","fila"+(e.fecha&&e.fecha<hoy?" pasado":"")+(e.cancelado?" cancelado":""));r.type="button";
     const d=e.fecha?aFecha(e.fecha):null;
-    r.append(el("span","f",d?DIAS[d.getDay()].slice(0,3)+" "+d.getDate()+" "+MES3[d.getMonth()]:"a confirmar"),el("span","t",e.titulo),el("span","h",horario(e)));
+    r.append(el("span","f",d?DIAS[d.getDay()].slice(0,3)+" "+d.getDate()+" "+MES3[d.getMonth()]:"a confirmar"),(()=>{const t=el("span","t");t.append(el("span",null,e.titulo));if(e.cancelado)t.append(el("span","tag","Cancelada"));return t})(),el("span","h",horario(e)));
     r.onclick=()=>abrir(e);l.append(r);
   }
 }
 function pintarProximo(){
-  const p=$("proximo"),hoy=hoyISO(),e=eventos.find(x=>x.fecha&&x.fecha>=hoy);
+  const p=$("proximo"),hoy=hoyISO(),e=eventos.find(x=>x.fecha&&x.fecha>=hoy&&!x.cancelado);
   if(!e){p.hidden=true;return}
   p.replaceChildren();const d=aFecha(e.fecha);
   const izq=el("div");izq.append(el("div","num",d.getDate()),el("div","mes",MES3[d.getMonth()]));

@@ -23,6 +23,24 @@
     "avisado": true
   },
   {
+    "id": "cobra-280060",
+    "titulo": "UVP AFTER FLORIPA I LICEO SOLYMAR 1",
+    "fecha": "2026-10-02",
+    "hora": "23:59",
+    "horaFin": "",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "",
+    "imagen": "",
+    "entradas": "https://cobraticket.uy/e/uvp-i-liceo-solymar-1-280060",
+    "notas": "",
+    "otros": [],
+    "fuente": "Cobraticket",
+    "encontrado": "2026-10-21T18:10:00Z",
+    "avisado": true
+  },
+  {
     "id": "cobra-243988",
     "titulo": "AL CARAJO FEST 6.0",
     "fecha": "2026-10-17",
@@ -43,7 +61,8 @@
     ],
     "fuente": "Cobraticket",
     "encontrado": "2026-10-21T18:00:00Z",
-    "avisado": true
+    "avisado": true,
+    "cancelado": true
   },
   {
     "id": "cobra-516124",

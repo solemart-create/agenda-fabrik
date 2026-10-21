@@ -25,17 +25,25 @@ export function textOf(html) {
   ).split("\n").map(l => l.replace(/\s+/g, " ").trim()).filter(Boolean);
 }
 
-// ¿Es en Fabrik? Nombre del lugar u organizador, o la esquina Cruz del Sur y Giannattasio.
-export function esFabrik(lineas) {
-  const t = lineas.join(" | ");
-  if (/\bFABRIK\b/i.test(t)) return true;
-  // Fabrik también figura como "Cruz del Sur 7030 (San José de Carrasco)".
-  return /Cruz del Sur/i.test(t) && /Gia?n+at+as+io|\b7030\b|San Jos[eé] de Carrasco/i.test(t);
+// ¿Es en Fabrik? Se decide por el LUGAR, no por el organizador:
+// la productora "FABRIK" también hace fiestas en BlackBox, Espacio Olivos y otros lugares.
+// Fabrik figura como lugar "FABRIK" o con la dirección Cruz del Sur esq. Gianattassio / Cruz del Sur 7030.
+export function esFabrik(lugar, direccion) {
+  if (/^\s*FABRIK\s*$/i.test(lugar || "")) return true;
+  const d = direccion || "";
+  return /Cruz del Sur/i.test(d) && /Gia?n+at+as+io|\b7030\b|San Jos[eé] de Carrasco/i.test(d);
+}
+
+// Bloque del lugar: la línea "…, Canelones" (o Montevideo, Maldonado) y las dos anteriores.
+function bloqueLugar(lineas) {
+  const i = lineas.findIndex(l => /,\s*(Canelones|Montevideo|Maldonado|San Jos[eé]|Colonia|Rocha)\s*$/i.test(l));
+  if (i < 2) return { lugar: "", direccion: "" };
+  return { lugar: lineas[i - 2], direccion: lineas[i - 1] + ", " + lineas[i] };
 }
 
 export function parseEvento(html, url) {
   const lineas = textOf(html);
-  const titulo = meta(html, "og:title") || (/<title>([^<|]+)/i.exec(html)?.[1] || "").trim();
+  const titulo = (meta(html, "og:title") || (/<title>([^<|]+)/i.exec(html)?.[1] || "")).trim();
   const imagen = meta(html, "og:image");
   const tiempos = [...html.matchAll(/<time[^>]*datetime="([^"]+)"/gi)].map(m => m[1]);
   const inicio = tiempos[0] || "";
@@ -44,14 +52,11 @@ export function parseEvento(html, url) {
   const hora = inicio.slice(11, 16);
   const horaFin = fin && fin.slice(11, 16) !== hora ? fin.slice(11, 16) : "";
 
-  // Lugar: la línea en mayúsculas seguida de la dirección, cerca del pin del mapa.
-  let lugar = "", direccion = "";
-  const iDir = lineas.findIndex(l => /Cruz del Sur|Gia?n+at+as+io/i.test(l));
-  if (iDir > 0) { lugar = lineas[iDir - 1]; direccion = [lineas[iDir], lineas[iDir + 1]].filter(Boolean).join(", "); }
-  else {
-    const iCiudad = lineas.findIndex(l => /Ciudad de la Costa/i.test(l));
-    if (iCiudad > 1) { lugar = lineas[iCiudad - 2]; direccion = lineas[iCiudad - 1] + ", " + lineas[iCiudad]; }
-  }
+  const { lugar, direccion } = bloqueLugar(lineas);
+  const organiza = lineas[lineas.indexOf("Organiza") + 1] || "";
+  // Sólo el título o una etiqueta suelta "Cancelado"; el pie de página habla de devoluciones y no cuenta.
+  const cancelado = /\b(cancelad[oa]|suspendid[oa])\b/i.test(titulo) ||
+    lineas.some(l => /^(evento\s+)?(cancelad[oa]|suspendid[oa])$/i.test(l));
   const categoria = lineas.find(l => /^(Fiestas|Música|Musica|Teatro|Deportes|Otros|Congresos|Stand ?up)$/i.test(l)) || "";
   const edad = lineas.find(l => /^\+\s?\d{2}\s*años$/i.test(l)) || "";
   const id = (/-(\d{5,})\/?$/.exec(url) || [])[1] || url;
@@ -61,11 +66,11 @@ export function parseEvento(html, url) {
     titulo: titulo.replace(/\s+/g, " "),
     fecha, hora, horaFin,
     categoria, edad,
-    lugar, direccion,
+    lugar, direccion, organiza, cancelado,
     imagen,
     url,
     fuente: "Cobraticket",
-    esFabrik: esFabrik(lineas),
+    esFabrik: esFabrik(lugar, direccion),
   };
 }
 

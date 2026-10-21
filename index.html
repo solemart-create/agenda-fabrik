@@ -55,6 +55,7 @@ h1{margin:6px 0 0;font-stretch:125%;font-weight:800;font-size:clamp(44px,9vw,84p
 .nav{display:flex;gap:6px}
 .nav button{font:inherit;font-family:var(--mono);font-size:13px;color:var(--blanco);background:var(--acero-2);border:1px solid var(--linea);min-width:40px;height:36px;cursor:pointer;padding:0 12px}
 .nav button:hover{border-color:var(--gris-2)}
+.nav button.hay{border-color:var(--rojo);color:var(--blanco)}
 .dias{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
 .dias .cab{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);padding:10px 10px 8px;border-bottom:1px solid var(--linea)}
 .dia{position:relative;min-height:112px;padding:8px;border-right:1px solid var(--linea);border-bottom:1px solid var(--linea);display:flex;flex-direction:column;gap:6px;min-width:0;background-size:cover;background-position:center}
@@ -228,6 +229,9 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("velo").hidden)cerrar()})
 function pintarCal(){
   const y=vista.getFullYear(),m=vista.getMonth();
   $("mes-titulo").textContent=MESES[m]+" "+y;
+  // Los botones muestran el mes vecino y cuántas fiestas tiene, para saber si vale la pena ir.
+  const vecino=(d,boton,flecha,antes)=>{const f=new Date(y,m+d,1);const clave=f.getFullYear()+"-"+String(f.getMonth()+1).padStart(2,"0");const n=eventos.filter(e=>(e.fecha||"").startsWith(clave)).length;const txt=MES3[f.getMonth()]+(n?" · "+n:"");$(boton).textContent=antes?flecha+" "+txt:txt+" "+flecha;$(boton).setAttribute("aria-label",MESES[f.getMonth()]+(n?", "+n+(n>1?" fiestas":" fiesta"):", sin fiestas"));$(boton).classList.toggle("hay",n>0)};
+  vecino(-1,"ant","←",true); vecino(1,"sig","→",false);
   const g=$("grilla");g.replaceChildren();
   for(const d of ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"])g.append(el("div","cab",d));
   const primero=new Date(y,m,1); const desfase=(primero.getDay()+6)%7;

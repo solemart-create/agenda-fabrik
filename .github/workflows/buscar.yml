@@ -25,7 +25,7 @@ jobs:
       - name: Revisar Cobraticket y avisar
         env:
           NTFY_TOPIC: ${{ vars.NTFY_TOPIC || 'fabrik-sole-691a6efce6' }}
-          SITIO_URL: ${{ vars.SITIO_URL }}
+          SITIO_URL: ${{ vars.SITIO_URL || 'https://agenda-fabrik.vercel.app' }}
         run: node scripts/buscar-cobraticket.mjs
       - name: Guardar cambios
         run: |

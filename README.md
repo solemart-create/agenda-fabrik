@@ -9,4 +9,4 @@ Calendario de fiestas y eventos en Fabrik (Cruz del Sur y Giannattasio, Ciudad d
 
 Configuración (Settings → Secrets and variables → Actions → Variables):
 - `NTFY_TOPIC` (opcional): canal de ntfy. Si no se define, usa el que está en el workflow.
-- `SITIO_URL`: dirección del sitio en Vercel, para que la notificación abra la tarjeta del evento.
+- `SITIO_URL` (opcional): dirección del sitio. Por defecto https://agenda-fabrik.vercel.app

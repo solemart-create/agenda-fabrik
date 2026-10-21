@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Agenda Fabrik</title>
-<meta name="description" content="Fiestas y eventos en Fabrik, Ciudad de la Costa.">
+<meta name="description" content="Calendario de fiestas en Fabrik, Ciudad de la Costa, para los vecinos.">
 <meta name="theme-color" content="#0c0c0d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,7 +138,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blanco);outline-off
 <div class="marco">
   <header>
     <div>
-      <span class="eti">Agenda · Ciudad de la Costa</span>
+      <span class="eti">Agenda de vecinos · Ciudad de la Costa</span>
       <h1>Fabrik</h1>
       <p class="sub">Cruz del Sur esquina Giannattasio, San José de Carrasco</p>
     </div>
@@ -166,7 +166,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blanco);outline-off
 
   <footer>
     <span>Agenda no oficial, armada a partir de lo que Fabrik publica.</span>
-    <span>Entradas en Cobraticket</span>
   </footer>
 </div>
 
@@ -210,7 +209,7 @@ function abrir(ev){
   b.append(d);
   if(ev.notas)b.append(el("p","notas",ev.notas));
   const ac=el("div","acciones");
-  if(ev.entradas&&!ev.cancelado){const a=el("a","boton");a.href=ev.entradas;a.target="_blank";a.rel="noopener";a.append(el("span",null,"Comprar entradas"),el("span",null,"↗"));ac.append(a)}
+  if(ev.entradas&&!ev.cancelado){const a=el("a","boton");a.href=ev.entradas;a.target="_blank";a.rel="noopener";a.append(el("span",null,"Ver publicación del evento"),el("span",null,"↗"));ac.append(a)}
   for(const o of (ev.otros||[])){if(!o.url)continue;const a=el("a","boton sec");a.href=o.url;a.target="_blank";a.rel="noopener";a.append(el("span",null,o.nombre||"Ver publicación"),el("span",null,"↗"));ac.append(a)}
   const mapa=el("a","boton sec");mapa.href="https://www.google.com/maps/place/FABRIK/@-34.843256,-55.9991634,17z";mapa.target="_blank";mapa.rel="noopener";mapa.append(el("span",null,"Cómo llegar"),el("span",null,"↗"));ac.append(mapa);
   b.append(ac);

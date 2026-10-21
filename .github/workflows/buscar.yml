@@ -2,7 +2,8 @@ name: Buscar eventos en Fabrik
 
 on:
   schedule:
-    - cron: "17 * * * *"   # cada hora
+    - cron: "17 * * * *"     # cada hora: Cobraticket
+    - cron: "17 */3 * * *"   # cada 3 horas: además, búsqueda web con Tavily
   workflow_dispatch:        # botón "Run workflow" para correrlo a mano
   push:
     paths: ["data/seguir.json", "data/eventos.json", "data/candidatos.json"]
@@ -22,6 +23,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Buscar links escondidos en la web (cada 3 horas)
+        if: ${{ github.event.schedule == '17 */3 * * *' || github.event_name == 'workflow_dispatch' }}
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+        run: node scripts/buscar-web.mjs
       - name: Revisar Cobraticket y avisar
         env:
           NTFY_TOPIC: ${{ vars.NTFY_TOPIC || 'fabrik-sole-691a6efce6' }}

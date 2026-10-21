@@ -10,3 +10,5 @@ Calendario de fiestas y eventos en Fabrik (Cruz del Sur y Giannattasio, Ciudad d
 Configuración (Settings → Secrets and variables → Actions → Variables):
 - `NTFY_TOPIC` (opcional): canal de ntfy. Si no se define, usa el que está en el workflow.
 - `SITIO_URL` (opcional): dirección del sitio. Por defecto https://agenda-fabrik.vercel.app
+
+- `scripts/buscar-web.mjs` busca links escondidos con Tavily cada 3 horas (o al tocar "Run workflow"). Necesita el secreto `TAVILY_API_KEY`; sin él, ese paso no hace nada.

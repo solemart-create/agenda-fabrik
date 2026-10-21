@@ -1,7 +1,7 @@
 // Lee el HTML de una página de evento de Cobraticket y devuelve sus datos.
 // Sin dependencias, para poder probarlo también en el navegador.
 
-const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre","diciembre"];
 
 function meta(html, prop) {
   const re = new RegExp(`<meta[^>]+(?:property|name)="${prop}"[^>]+content="([^"]*)"`, "i");

@@ -99,5 +99,28 @@
     "fuente": "Cobraticket",
     "encontrado": "2026-10-21T17:50:00Z",
     "avisado": true
+  },
+  {
+    "id": "cobra-438738",
+    "titulo": "HALLOWEEN EN LA COSTA I 31.01 I pres. Safaera",
+    "fecha": "2026-10-31",
+    "hora": "23:59",
+    "horaFin": "06:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "+18 años",
+    "imagen": "https://img.cobraticket.uy/65NE8-D6ytWM8Do79qzJN.jpg",
+    "entradas": "https://cobraticket.uy/e/halloween-en-la-costa-i-3101-i-pres-safaera-438738",
+    "notas": "",
+    "otros": [
+      {
+        "nombre": "Instagram @eventoswave.uy",
+        "url": "https://www.instagram.com/eventoswave.uy/"
+      }
+    ],
+    "fuente": "Instagram + Cobraticket",
+    "encontrado": "2026-10-21T18:20:00Z",
+    "avisado": false
   }
 ]

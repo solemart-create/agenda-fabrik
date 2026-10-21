@@ -89,5 +89,6 @@ eventos.sort((a, b) => (a.fecha || "9999").localeCompare(b.fecha || "9999"));
 await guardar(ARCH_EVENTOS, eventos);
 await guardar(ARCH_REVISADOS, revisados);
 await guardar(ARCH_SEGUIR, seguir);
-await guardar(ARCH_CAND, []);
+// Se vacían los de Cobraticket; los de otras ticketeras que no se pudieron abrir quedan para la próxima.
+await guardar(ARCH_CAND, (await leer(ARCH_CAND, [])).filter(u => !/cobraticket\.uy\/e\//.test(String(u))));
 console.log(JSON.stringify({ revisados: aRevisar.length, nuevos }));

@@ -29,6 +29,11 @@
     "\"en fabrik\" fiesta \"ciudad de la costa\"",
     "site:passline.com \"ciudad de la costa\" fabrik",
     "site:redtickets.net fabrik",
-    "site:entraste.com fabrik"
+    "site:entraste.com fabrik",
+    "site:passline.com fabrik uruguay",
+    "site:passline.com \"ciudad de la costa\"",
+    "site:passline.com \"cruz del sur\"",
+    "site:mientrada.com.uy fabrik",
+    "site:mientrada.com.uy \"ciudad de la costa\""
   ]
 }

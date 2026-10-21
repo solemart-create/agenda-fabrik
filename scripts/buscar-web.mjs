@@ -1,6 +1,6 @@
 // Busca links escondidos de Cobraticket con Tavily y los deja en data/candidatos.json.
 // Lo corre el workflow cada 3 horas, sólo si existe el secreto TAVILY_API_KEY.
-// Plan gratis: 1.000 búsquedas por mes. 3 búsquedas x 8 veces por día = ~720 por mes.
+// Plan gratis: 1.000 búsquedas por mes. 4 búsquedas x 8 veces por día = ~960 por mes.
 import { readFile, writeFile } from "node:fs/promises";
 
 const KEY = process.env.TAVILY_API_KEY;
@@ -13,6 +13,7 @@ const BUSQUEDAS = [
   "cobraticket FABRIK Cruz del Sur Gianattassio Ciudad de la Costa",
   "fiesta FABRIK \"Ciudad de la Costa\" entradas cobraticket",
   "cobraticket \"Cruz del sur 7030\" San José de Carrasco",
+  "passline fiesta FABRIK \"Ciudad de la Costa\" Uruguay",
 ];
 
 const conocidos = new Set([
@@ -34,6 +35,10 @@ for (const query of BUSQUEDAS) {
     for (const m of (url + " " + content).matchAll(/https?:\/\/(?:www\.)?cobraticket\.uy\/e\/([a-z0-9-]+-(\d{5,}))/gi)) {
       const link = "https://cobraticket.uy/e/" + m[1].toLowerCase();
       if (!conocidos.has(link) && revisados[m[2]] !== "no") candidatos.add(link);
+    }
+    for (const m of (url + " " + content).matchAll(/https?:\/\/(?:www\.)?(passline\.com\/eventos\/[a-z0-9-]+|mientrada\.com\.uy\/evento\/[a-z0-9-]+-\d+)/gi)) {
+      const link = "https://" + (m[1].startsWith("passline") ? "www." : "") + m[1].toLowerCase();
+      if (!conocidos.has(link)) candidatos.add(link);
     }
   }
 }

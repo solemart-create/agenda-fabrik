@@ -12,3 +12,5 @@ Configuración (Settings → Secrets and variables → Actions → Variables):
 - `SITIO_URL` (opcional): dirección del sitio. Por defecto https://agenda-fabrik.vercel.app
 
 - `scripts/buscar-web.mjs` busca links escondidos con Tavily cada 3 horas (o al tocar "Run workflow"). Necesita el secreto `TAVILY_API_KEY`; sin él, ese paso no hace nada.
+
+- Todo evento que se agrega, sea encontrado por la búsqueda o cargado a mano, va con `"avisado": false` para que llegue la notificación. Si la fecha ya pasó, el aviso dice "Agregado a la agenda".

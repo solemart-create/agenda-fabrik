@@ -27,7 +27,7 @@ async function avisar(ev) {
   const cuando = [ev.fecha && fechaLarga(ev.fecha), ev.hora && ev.hora + " h"].filter(Boolean).join(" · ");
   const body = {
     topic: TOPIC,
-    title: "Nuevo en Fabrik: " + ev.titulo,
+    title: (ev.fecha && ev.fecha < hoy ? "Agregado a la agenda: " : "Nuevo en Fabrik: ") + ev.titulo,
     message: [cuando, ev.direccion].filter(Boolean).join("\n") || "Apareció un evento nuevo.",
     click: SITIO ? `${SITIO}/#${ev.id}` : (ev.entradas || undefined),
     tags: ["tada"],

@@ -91,7 +91,6 @@ for (const url of aRevisar) {
   eventos.push({
     id, ...ev, lugar: ev.lugar || "FABRIK", categoria: "Fiestas", edad: "",
     entradas: url, notas: "", otros: [], encontrado: new Date().toISOString(), avisado: false,
-    ...(ev.fecha && ev.fecha < hoy ? { avisado: true } : {}),
   });
   conocidos.add(url); nuevos++;
   console.log("NUEVO:", ev.titulo, ev.fecha, url);

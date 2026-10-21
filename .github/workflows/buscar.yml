@@ -24,7 +24,7 @@ jobs:
           node-version: 20
       - name: Revisar Cobraticket y avisar
         env:
-          NTFY_TOPIC: ${{ vars.NTFY_TOPIC }}
+          NTFY_TOPIC: ${{ vars.NTFY_TOPIC || 'fabrik-sole-691a6efce6' }}
           SITIO_URL: ${{ vars.SITIO_URL }}
         run: node scripts/buscar-cobraticket.mjs
       - name: Guardar cambios

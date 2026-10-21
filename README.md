@@ -8,5 +8,5 @@ Calendario de fiestas y eventos en Fabrik (Cruz del Sur y Giannattasio, Ciudad d
 - Para corregir o agregar algo a mano: editar `data/eventos.json`. Campos: `titulo`, `fecha` (AAAA-MM-DD), `hora`, `horaFin`, `direccion`, `notas`, `entradas` (link de compra), `otros` (lista de `{nombre, url}`), `imagen`. Con `"avisado": false` se manda la notificación en la próxima corrida; con `"descartado": true` el evento se oculta.
 
 Configuración (Settings → Secrets and variables → Actions → Variables):
-- `NTFY_TOPIC`: canal de ntfy al que está suscripto el celular.
+- `NTFY_TOPIC` (opcional): canal de ntfy. Si no se define, usa el que está en el workflow.
 - `SITIO_URL`: dirección del sitio en Vercel, para que la notificación abra la tarjeta del evento.

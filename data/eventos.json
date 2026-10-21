@@ -59,6 +59,24 @@
     "avisado": true
   },
   {
+    "id": "manual-2026-10-03-privado",
+    "titulo": "Evento privado / sin identificar",
+    "fecha": "2026-10-03",
+    "hora": "23:00",
+    "horaFin": "06:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiesta privada",
+    "edad": "",
+    "imagen": "",
+    "entradas": "",
+    "notas": "Reportado por vecinos. No se encontró publicación ni venta de entradas: probablemente un evento privado.",
+    "otros": [],
+    "fuente": "Vecinos",
+    "encontrado": "2026-10-21T19:22:00Z",
+    "avisado": true
+  },
+  {
     "id": "cobra-243988",
     "titulo": "AL CARAJO FEST 6.0",
     "fecha": "2026-10-17",

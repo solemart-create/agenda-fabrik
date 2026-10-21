@@ -1,8 +1,21 @@
 {
   "instagram": [
-    { "cuenta": "fabrik_uy", "nota": "Cuenta del lugar. Casi no publica fiestas." },
-    { "cuenta": "alcarajo.cerveceria", "nota": "Hace el Al Carajo Fest en Fabrik. Publica en historias." },
-    { "cuenta": "eventoswave.uy", "nota": "Halloween en la Costa. Pone el link de Cobraticket en la bio." }
+    {
+      "cuenta": "fabrik_uy",
+      "nota": "Cuenta del lugar. Casi no publica fiestas."
+    },
+    {
+      "cuenta": "alcarajo.cerveceria",
+      "nota": "Hace el Al Carajo Fest en Fabrik. Publica en historias."
+    },
+    {
+      "cuenta": "eventoswave.uy",
+      "nota": "Halloween en la Costa. Pone el link de Cobraticket en la bio. (21/10/2026: la cuenta ya no existe en Instagram.)"
+    },
+    {
+      "cuenta": "alcarajofest",
+      "nota": "Cuenta de la fiesta Al Carajo Fest, que se hace en Fabrik."
+    }
   ],
   "busquedas_google": [
     "site:cobraticket.uy FABRIK",

@@ -1,0 +1,21 @@
+{
+  "instagram": [
+    { "cuenta": "fabrik_uy", "nota": "Cuenta del lugar. Casi no publica fiestas." },
+    { "cuenta": "alcarajo.cerveceria", "nota": "Hace el Al Carajo Fest en Fabrik. Publica en historias." },
+    { "cuenta": "eventoswave.uy", "nota": "Halloween en la Costa. Pone el link de Cobraticket en la bio." }
+  ],
+  "busquedas_google": [
+    "site:cobraticket.uy FABRIK",
+    "site:cobraticket.uy \"Gianattassio\"",
+    "site:cobraticket.uy \"Cruz del Sur\" \"Ciudad de la Costa\"",
+    "site:cobraticket.uy \"Cruz del sur 7030\"",
+    "site:cobraticket.uy \"San José de Carrasco\"",
+    "fabrik \"ciudad de la costa\" fiesta entradas",
+    "site:instagram.com \"fabrik\" \"ciudad de la costa\"",
+    "site:instagram.com \"cobraticket.uy/e/\" fabrik",
+    "\"en fabrik\" fiesta \"ciudad de la costa\"",
+    "site:passline.com \"ciudad de la costa\" fabrik",
+    "site:redtickets.net fabrik",
+    "site:entraste.com fabrik"
+  ]
+}

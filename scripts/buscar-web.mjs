@@ -1,6 +1,7 @@
 // Busca links escondidos de Cobraticket con Tavily y los deja en data/candidatos.json.
-// Lo corre el workflow cada 3 horas, sólo si existe el secreto TAVILY_API_KEY.
-// Plan gratis: 1.000 búsquedas por mes. 4 búsquedas x 8 veces por día = ~960 por mes.
+// Lo corre el workflow cada hora, sólo si existe el secreto TAVILY_API_KEY.
+// Plan gratis: 1.000 búsquedas por mes. Hace UNA búsqueda por hora, rotando la lista: ~720 por mes.
+// Al correrlo a mano (TODAS=1) hace todas.
 import { readFile, writeFile } from "node:fs/promises";
 
 const KEY = process.env.TAVILY_API_KEY;
@@ -14,6 +15,8 @@ const BUSQUEDAS = [
   "fiesta FABRIK \"Ciudad de la Costa\" entradas cobraticket",
   "cobraticket \"Cruz del sur 7030\" San José de Carrasco",
   "passline fiesta FABRIK \"Ciudad de la Costa\" Uruguay",
+  "fiesta liceo FABRIK Ciudad de la Costa entradas 2026",
+  "mientrada FABRIK Ciudad de la Costa fiesta",
 ];
 
 const conocidos = new Set([
@@ -23,7 +26,10 @@ const conocidos = new Set([
 const revisados = await leer("data/revisados.json", {});
 const candidatos = new Set(await leer("data/candidatos.json", []));
 
-for (const query of BUSQUEDAS) {
+const hora = Math.floor(Date.now() / 3600e3);
+const tanda = process.env.TODAS === "1" ? BUSQUEDAS : [BUSQUEDAS[hora % BUSQUEDAS.length]];
+console.log("Tavily:", tanda.join(" | "));
+for (const query of tanda) {
   const r = await fetch("https://api.tavily.com/search", {
     method: "POST",
     headers: { "content-type": "application/json", authorization: "Bearer " + KEY },

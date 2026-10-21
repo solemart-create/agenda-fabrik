@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agenda Fabrik</title>
+<meta name="description" content="Fiestas y eventos en Fabrik, Ciudad de la Costa.">
+<meta name="theme-color" content="#0c0c0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Calendario sobre metal oscuro; cada evento es una credencial roja que se abre encima. Tema único oscuro, a propósito. */
+:root{
+  --negro:#0c0c0d; --acero:#18181a; --acero-2:#222225; --linea:#2c2c30;
+  --rojo:#e3171b; --rojo-oscuro:#7a0a0c; --rojo-tinta:#ff4a4d;
+  --blanco:#f4f4f2; --gris:#a9a9ad; --gris-2:#6d6d73;
+  --ancha:"Archivo","Arial Black",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--negro)}
+body{margin:0;min-height:100vh;color:var(--blanco);font-family:var(--ancha);font-stretch:100%;font-weight:400;font-size:15px;line-height:1.5;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px),
+    radial-gradient(120% 60% at 50% -10%,#232326 0%,var(--negro) 60%);
+  background-color:var(--negro);
+  padding:max(28px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(48px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+a{color:inherit}
+.marco{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+
+/* Cabezal */
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;border-bottom:1px solid var(--linea);padding-bottom:22px}
+.eti{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris)}
+h1{margin:6px 0 0;font-stretch:125%;font-weight:800;font-size:clamp(44px,9vw,84px);line-height:.9;letter-spacing:.06em;text-transform:uppercase}
+.sub{margin:10px 0 0;color:var(--gris);font-size:14px}
+.cinta{display:inline-flex;align-items:center;gap:10px;background:var(--rojo);color:var(--blanco);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px}
+.cinta i{width:7px;height:7px;border-radius:50%;background:var(--blanco);box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+
+/* Próximo */
+.proximo{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:18px 20px;background:linear-gradient(100deg,var(--rojo) 0%,#b30f12 55%,var(--rojo-oscuro) 100%);cursor:pointer;border:0;color:var(--blanco);text-align:left;font:inherit;width:100%}
+.proximo .num{font-stretch:125%;font-weight:800;font-size:44px;line-height:1}
+.proximo .mes{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.proximo h2{margin:0;font-stretch:112%;font-weight:700;font-size:clamp(17px,2.6vw,24px);line-height:1.15;text-transform:uppercase;overflow-wrap:anywhere}
+.proximo .det{font-family:var(--mono);font-size:12px;opacity:.85;margin-top:4px}
+.proximo .ir{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.55);padding:8px 12px;white-space:nowrap}
+.proximo:hover .ir{background:rgba(0,0,0,.18)}
+
+/* Calendario */
+.cal{background:var(--acero);border:1px solid var(--linea)}
+.cal-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--linea)}
+.cal-top h2{margin:0;font-stretch:125%;font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.nav{display:flex;gap:6px}
+.nav button{font:inherit;font-family:var(--mono);font-size:13px;color:var(--blanco);background:var(--acero-2);border:1px solid var(--linea);min-width:40px;height:36px;cursor:pointer;padding:0 12px}
+.nav button:hover{border-color:var(--gris-2)}
+.dias{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.dias .cab{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);padding:10px 10px 8px;border-bottom:1px solid var(--linea)}
+.dia{min-height:104px;padding:8px;border-right:1px solid var(--linea);border-bottom:1px solid var(--linea);display:flex;flex-direction:column;gap:6px;min-width:0}
+.dia:nth-child(7n+7){border-right:0}
+.dia .n{font-family:var(--mono);font-size:12px;color:var(--gris)}
+.dia.fuera .n{color:#3d3d42}
+.dia.hoy .n{color:var(--blanco);background:var(--blanco);color:var(--negro);align-self:flex-start;padding:0 6px;font-weight:500}
+.dia.pasado .ev{opacity:.5}
+.ev{display:block;width:100%;text-align:left;font:inherit;font-stretch:100%;font-weight:600;font-size:11.5px;line-height:1.2;text-transform:uppercase;letter-spacing:.02em;color:var(--blanco);background:var(--rojo);border:0;padding:6px 7px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.ev:hover{background:#ff2a2e}
+.ev small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;opacity:.85;margin-bottom:2px;text-transform:none}
+@media (max-width:620px){
+  .dia{min-height:58px;padding:5px;align-items:center}
+  .dia .n{font-size:11px}
+  .ev{font-size:0;padding:0;width:10px;height:10px;border-radius:50%;-webkit-line-clamp:unset}
+  .ev small{display:none}
+  .dia.con{cursor:pointer}
+  .dias .cab{padding:8px 0;text-align:center;font-size:9.5px;letter-spacing:.08em}
+}
+
+/* Lista */
+.lista{display:flex;flex-direction:column}
+.fila{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:center;padding:14px 4px;border-top:1px solid var(--linea);background:none;border-left:0;border-right:0;border-bottom:0;color:inherit;font:inherit;text-align:left;cursor:pointer;width:100%}
+.fila:last-child{border-bottom:1px solid var(--linea)}
+.fila:hover{background:rgba(255,255,255,.025)}
+.fila .f{font-family:var(--mono);font-size:12px;color:var(--rojo-tinta);text-transform:uppercase;letter-spacing:.06em}
+.fila .t{font-stretch:110%;font-weight:700;text-transform:uppercase;font-size:15px;overflow-wrap:anywhere;min-width:0}
+.fila .h{font-family:var(--mono);font-size:12px;color:var(--gris)}
+.fila.pasado{opacity:.45}
+.vacio{color:var(--gris);padding:18px 4px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+@media (max-width:520px){.fila{grid-template-columns:70px 1fr}.fila .h{grid-column:2}}
+
+/* Credencial */
+.velo{position:fixed;inset:0;background:rgba(5,5,6,.78);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 24px max(16px,env(safe-area-inset-left));overflow-y:auto;z-index:20}
+.cinta-cuelga{width:46px;height:56px;margin:0 auto;background:var(--rojo);display:flex;align-items:center;justify-content:center;font-stretch:125%;font-weight:800;font-size:9px;letter-spacing:.2em;writing-mode:vertical-rl;transform:rotate(180deg);color:var(--blanco)}
+.gancho{width:22px;height:22px;margin:-4px auto 0;border:3px solid #c9c9cd;border-radius:50%;border-top-color:#8d8d92}
+.cred{position:relative;width:min(440px,100%);margin:-6px auto 0;background:
+  radial-gradient(90% 60% at 20% 0%,rgba(255,255,255,.14),transparent 60%),
+  linear-gradient(160deg,#f0191d 0%,#c31014 45%,#6d090b 100%);
+  color:var(--blanco);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:baja .32s ease-out}
+@keyframes baja{from{transform:translateY(-14px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.cred{animation:none}}
+.ranura{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:54px;height:10px;border-radius:6px;background:rgba(0,0,0,.55);box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.cred .foto{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;max-width:100%;margin-top:38px;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.cred .cuerpo{padding:22px 22px 24px;display:flex;flex-direction:column;gap:18px}
+.cred .tope{padding:38px 22px 0;display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.cred.sin-foto .cuerpo{padding-top:14px}
+.cred h3{margin:0;font-stretch:118%;font-weight:800;font-size:clamp(24px,6vw,32px);line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere}
+.datos{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;border-top:1px solid rgba(255,255,255,.28);padding-top:16px}
+.datos div{min-width:0}
+.datos .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.datos .v{font-weight:600;font-size:15px;overflow-wrap:anywhere}
+.datos .ancho{grid-column:1/-1}
+.notas{margin:0;font-size:14px;line-height:1.55;opacity:.95}
+.acciones{display:flex;flex-direction:column;gap:8px}
+.boton{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;font-stretch:118%;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;background:var(--negro);color:var(--blanco)}
+.boton:hover{background:#000}
+.boton.sec{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em}
+.boton.sec:hover{background:rgba(0,0,0,.35)}
+.cerrar{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;background:rgba(0,0,0,.3);color:var(--blanco);font:inherit;font-size:18px;line-height:1;cursor:pointer}
+.cerrar:hover{background:rgba(0,0,0,.5)}
+.codigo{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;border-top:1px dashed rgba(255,255,255,.3);padding-top:12px}
+
+footer{color:var(--gris-2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;border-top:1px solid var(--linea);padding-top:16px}
+button:focus-visible,a:focus-visible{outline:2px solid var(--blanco);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="marco">
+  <header>
+    <div>
+      <span class="eti">Agenda · Ciudad de la Costa</span>
+      <h1>Fabrik</h1>
+      <p class="sub">Cruz del Sur esquina Giannattasio, San José de Carrasco</p>
+    </div>
+    <span class="cinta"><i></i>Se revisa cada hora</span>
+  </header>
+
+  <button class="proximo" id="proximo" type="button" hidden></button>
+
+  <section class="cal" aria-label="Calendario">
+    <div class="cal-top">
+      <h2 id="mes-titulo">—</h2>
+      <div class="nav">
+        <button type="button" id="ant" aria-label="Mes anterior">←</button>
+        <button type="button" id="hoy">Hoy</button>
+        <button type="button" id="sig" aria-label="Mes siguiente">→</button>
+      </div>
+    </div>
+    <div class="dias" id="grilla"></div>
+  </section>
+
+  <section aria-labelledby="t-lista" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eti" id="t-lista">Todas las fechas</span>
+    <div class="lista" id="lista"><div class="vacio">Cargando eventos…</div></div>
+  </section>
+
+  <footer>
+    <span>Agenda no oficial, armada a partir de lo que Fabrik publica.</span>
+    <span>Entradas en Cobraticket</span>
+  </footer>
+</div>
+
+<div class="velo" id="velo" hidden>
+  <div style="width:100%;max-width:440px">
+    <div class="cinta-cuelga" aria-hidden="true">FABRIK</div>
+    <div class="gancho" aria-hidden="true"></div>
+    <article class="cred" id="cred" role="dialog" aria-modal="true" aria-labelledby="cred-titulo"></article>
+  </div>
+</div>
+
+<script>
+const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const MES3=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const $=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const hoyISO=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const aFecha=s=>{const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const fechaLinda=s=>{const d=aFecha(s);return DIAS[d.getDay()]+" "+d.getDate()+" de "+MESES[d.getMonth()]};
+const horario=e=>e.hora?(e.horaFin?e.hora+" a "+e.horaFin:e.hora)+" h":"A confirmar";
+
+let eventos=[], vista=new Date(); vista.setDate(1);
+
+function abrir(ev){
+  const c=$("cred"); c.replaceChildren(); c.className="cred"+(ev.imagen?"":" sin-foto");
+  const x=el("button","cerrar","×"); x.type="button"; x.setAttribute("aria-label","Cerrar"); x.onclick=cerrar; c.append(x);
+  c.append(el("div","ranura"));
+  const tope=el("div","tope"); tope.append(el("span",null,"Acceso · "+(ev.categoria||"Evento")),el("span",null,ev.edad||"")); c.append(tope);
+  if(ev.imagen){const i=el("img","foto");i.src=ev.imagen;i.alt="";i.loading="lazy";i.onerror=()=>{i.remove();c.classList.add("sin-foto")};c.append(i)}
+  const b=el("div","cuerpo");
+  const h=el("h3",null,ev.titulo||"Evento"); h.id="cred-titulo"; b.append(h);
+  const d=el("div","datos");
+  const par=(k,v,ancho)=>{const w=el("div",ancho?"ancho":null);w.append(el("div","k",k),el("div","v",v));d.append(w)};
+  par("Fecha",ev.fecha?fechaLinda(ev.fecha):"A confirmar");
+  par("Hora",horario(ev));
+  par("Lugar",[ev.lugar||"FABRIK",ev.direccion].filter(Boolean).join(" · "),true);
+  b.append(d);
+  if(ev.notas)b.append(el("p","notas",ev.notas));
+  const ac=el("div","acciones");
+  if(ev.entradas){const a=el("a","boton");a.href=ev.entradas;a.target="_blank";a.rel="noopener";a.append(el("span",null,"Comprar entradas"),el("span",null,"↗"));ac.append(a)}
+  for(const o of (ev.otros||[])){if(!o.url)continue;const a=el("a","boton sec");a.href=o.url;a.target="_blank";a.rel="noopener";a.append(el("span",null,o.nombre||"Ver publicación"),el("span",null,"↗"));ac.append(a)}
+  const mapa=el("a","boton sec");mapa.href="https://www.google.com/maps/place/FABRIK/@-34.843256,-55.9991634,17z";mapa.target="_blank";mapa.rel="noopener";mapa.append(el("span",null,"Cómo llegar"),el("span",null,"↗"));ac.append(mapa);
+  b.append(ac);
+  const cod=el("div","codigo");cod.append(el("span",null,"Fabrik · Ciudad de la Costa"),el("span",null,(ev.fuente||"")));b.append(cod);
+  c.append(b);
+  $("velo").hidden=false; document.body.style.overflow="hidden"; x.focus();
+  try{history.replaceState(null,"","#"+ev.id)}catch{}
+}
+function cerrar(){$("velo").hidden=true;document.body.style.overflow="";try{history.replaceState(null,"",location.pathname)}catch{}}
+$("velo").addEventListener("click",e=>{if(e.target===$("velo")||e.target===$("velo").firstElementChild)cerrar()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("velo").hidden)cerrar()});
+
+function pintarCal(){
+  const y=vista.getFullYear(),m=vista.getMonth();
+  $("mes-titulo").textContent=MESES[m]+" "+y;
+  const g=$("grilla");g.replaceChildren();
+  for(const d of ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"])g.append(el("div","cab",d));
+  const primero=new Date(y,m,1); const desfase=(primero.getDay()+6)%7;
+  const inicio=new Date(y,m,1-desfase); const hoy=hoyISO();
+  const total=Math.ceil((desfase+new Date(y,m+1,0).getDate())/7)*7;
+  for(let i=0;i<total;i++){
+    const f=new Date(inicio);f.setDate(inicio.getDate()+i);
+    const iso=f.getFullYear()+"-"+String(f.getMonth()+1).padStart(2,"0")+"-"+String(f.getDate()).padStart(2,"0");
+    const c=el("div","dia"+(f.getMonth()!==m?" fuera":"")+(iso===hoy?" hoy":"")+(iso<hoy?" pasado":""));
+    c.append(el("span","n",f.getDate()));
+    const del=eventos.filter(e=>e.fecha===iso);
+    if(del.length){c.classList.add("con");c.onclick=ev=>{if(ev.target===c||ev.target.className==="n")abrir(del[0])}}
+    for(const e of del){const b=el("button","ev");b.type="button";b.setAttribute("aria-label",e.titulo+", "+fechaLinda(iso));
+      if(e.hora)b.append(el("small",null,e.hora));b.append(document.createTextNode(e.titulo));b.onclick=()=>abrir(e);c.append(b)}
+    g.append(c);
+  }
+}
+function pintarLista(){
+  const l=$("lista");l.replaceChildren();const hoy=hoyISO();
+  const prox=eventos.filter(e=>!e.fecha||e.fecha>=hoy), pas=eventos.filter(e=>e.fecha&&e.fecha<hoy).reverse();
+  if(!eventos.length){l.append(el("div","vacio","Todavía no hay eventos publicados."));return}
+  if(!prox.length)l.append(el("div","vacio","No hay fechas próximas publicadas. Cuando aparezca una, la vas a ver acá."));
+  for(const e of [...prox,...pas]){
+    const r=el("button","fila"+(e.fecha&&e.fecha<hoy?" pasado":""));r.type="button";
+    const d=e.fecha?aFecha(e.fecha):null;
+    r.append(el("span","f",d?DIAS[d.getDay()].slice(0,3)+" "+d.getDate()+" "+MES3[d.getMonth()]:"a confirmar"),el("span","t",e.titulo),el("span","h",horario(e)));
+    r.onclick=()=>abrir(e);l.append(r);
+  }
+}
+function pintarProximo(){
+  const p=$("proximo"),hoy=hoyISO(),e=eventos.find(x=>x.fecha&&x.fecha>=hoy);
+  if(!e){p.hidden=true;return}
+  p.replaceChildren();const d=aFecha(e.fecha);
+  const izq=el("div");izq.append(el("div","num",d.getDate()),el("div","mes",MES3[d.getMonth()]));
+  const med=el("div");med.style.minWidth="0";med.append(el("div","eti",e.fecha===hoy?"Hoy":"Próximo"),el("h2",null,e.titulo),el("div","det",DIAS[d.getDay()]+" · "+horario(e)));
+  med.firstChild.style.color="rgba(255,255,255,.8)";
+  p.append(izq,med,el("span","ir","Ver"));p.onclick=()=>abrir(e);p.hidden=false;
+}
+function pintar(){pintarProximo();pintarCal();pintarLista()}
+$("ant").onclick=()=>{vista.setMonth(vista.getMonth()-1);pintarCal()};
+$("sig").onclick=()=>{vista.setMonth(vista.getMonth()+1);pintarCal()};
+$("hoy").onclick=()=>{vista=new Date();vista.setDate(1);pintarCal()};
+
+fetch("data/eventos.json",{cache:"no-store"}).then(r=>r.json()).then(lista=>{
+  eventos=(Array.isArray(lista)?lista:[]).filter(e=>!e.descartado).sort((a,b)=>(a.fecha||"9999").localeCompare(b.fecha||"9999"));
+  pintar();
+  const id=decodeURIComponent(location.hash.slice(1)); const e=id&&eventos.find(x=>x.id===id);
+  if(e){if(e.fecha){const d=aFecha(e.fecha);vista=new Date(d.getFullYear(),d.getMonth(),1);pintarCal()}abrir(e)}
+}).catch(()=>{$("lista").replaceChildren(el("div","vacio","No se pudieron cargar los eventos. Probá recargar la página."));pintarCal()});
+</script>
+</body>
+</html>

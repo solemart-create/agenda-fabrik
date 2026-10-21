@@ -1,0 +1,84 @@
+[
+  {
+    "id": "cobra-786340",
+    "titulo": "AL CARAJO FEST 5.0",
+    "fecha": "2026-09-19",
+    "hora": "23:55",
+    "horaFin": "05:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur 7030 (San José de Carrasco), Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "+21 años",
+    "imagen": "",
+    "entradas": "https://cobraticket.uy/e/al-carajo-fest-50-786340",
+    "notas": "En Cobraticket figuraba como \"Nueva Locación\", en la misma dirección.",
+    "otros": [
+      {
+        "nombre": "Instagram de Al Carajo",
+        "url": "https://www.instagram.com/alcarajo.cerveceria/"
+      }
+    ],
+    "fuente": "Cobraticket",
+    "encontrado": "2026-10-21T18:00:00Z",
+    "avisado": true
+  },
+  {
+    "id": "cobra-243988",
+    "titulo": "AL CARAJO FEST 6.0",
+    "fecha": "2026-10-17",
+    "hora": "23:50",
+    "horaFin": "05:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur 7030 (San José de Carrasco), Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "+21 años",
+    "imagen": "",
+    "entradas": "https://cobraticket.uy/e/al-carajo-fest-60-243988",
+    "notas": "",
+    "otros": [
+      {
+        "nombre": "Instagram de Al Carajo",
+        "url": "https://www.instagram.com/alcarajo.cerveceria/"
+      }
+    ],
+    "fuente": "Cobraticket",
+    "encontrado": "2026-10-21T18:00:00Z",
+    "avisado": true
+  },
+  {
+    "id": "cobra-516124",
+    "titulo": "FIESTA LICEO PINAR 1",
+    "fecha": "2026-10-23",
+    "hora": "23:59",
+    "horaFin": "06:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "",
+    "imagen": "https://img.cobraticket.uy/-udz9InGRcsGwaDznjS6N.jpg",
+    "entradas": "https://cobraticket.uy/e/fiesta-liceo-pinar-1-516124",
+    "notas": "",
+    "otros": [],
+    "fuente": "Cobraticket",
+    "encontrado": "2026-10-21T17:50:00Z",
+    "avisado": true
+  },
+  {
+    "id": "cobra-886745",
+    "titulo": "PRE GRADU FRANCES",
+    "fecha": "2026-10-24",
+    "hora": "23:59",
+    "horaFin": "06:00",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "+18 años",
+    "imagen": "",
+    "entradas": "https://cobraticket.uy/e/fiesta-liceo-frances-886745",
+    "notas": "",
+    "otros": [],
+    "fuente": "Cobraticket",
+    "encontrado": "2026-10-21T17:50:00Z",
+    "avisado": true
+  }
+]

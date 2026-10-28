@@ -47,5 +47,12 @@
     "site:redtickets.uy \"San José de Carrasco\"",
     "site:redtickets.uy \"Cruz del Sur\"",
     "site:redtickets.uy \"Gianattassio\""
+  ],
+  "sitios": [
+    {
+      "nombre": "Agenda Electrónica",
+      "url": "https://agendaelectronica.uy/",
+      "nota": "Agenda de fiestas electrónicas de Uruguay. Revisar /venues y /explorar buscando Fabrik o la dirección. Agregado por pedido de Soledad (28/10/2026)."
+    }
   ]
 }

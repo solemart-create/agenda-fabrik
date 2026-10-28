@@ -27,11 +27,13 @@ export function textOf(html) {
 
 // ¿Es en Fabrik? Se decide por el LUGAR, no por el organizador:
 // la productora "FABRIK" también hace fiestas en BlackBox, Espacio Olivos y otros lugares.
-// Fabrik figura como lugar "FABRIK" o con la dirección Cruz del Sur esq. Gianattassio / Cruz del Sur 7030.
+// Fabrik figura como lugar "FABRIK" o sólo con la esquina: Cruz del Sur y Gianattassio (en cualquier orden,
+// con cualquier ortografía: Gianatassio, Giannattasio...), Cruz del Sur 7030/7130 o San José de Carrasco.
+// La esquina puede venir en el nombre del lugar o en la dirección.
 export function esFabrik(lugar, direccion) {
   if (/^\s*FABRIK\s*$/i.test(lugar || "")) return true;
-  const d = direccion || "";
-  return /Cruz del Sur/i.test(d) && /Gia?n+at+as+io|\b7030\b|San Jos[eé] de Carrasco/i.test(d);
+  const d = `${lugar || ""} ${direccion || ""}`;
+  return /Cruz del Sur/i.test(d) && /Gia?n+at+as+io|\b7[01]30\b|San Jos[eé] de Carrasco/i.test(d);
 }
 
 // Bloque del lugar: la línea "…, Canelones" (o Montevideo, Maldonado) y las dos anteriores.

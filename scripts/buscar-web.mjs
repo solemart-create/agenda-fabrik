@@ -10,13 +10,22 @@ if (!KEY) { console.log("Sin TAVILY_API_KEY: no se busca en la web."); process.e
 const RAIZ = new URL("../", import.meta.url);
 const leer = async (f, d) => { try { return JSON.parse(await readFile(new URL(f, RAIZ), "utf8")); } catch { return d; } };
 
+// Fabrik muchas veces figura sólo con la esquina y con distintas ortografías (Gianattassio, Gianatassio, Giannattasio...).
 const BUSQUEDAS = [
   "cobraticket FABRIK Cruz del Sur Gianattassio Ciudad de la Costa",
-  "fiesta FABRIK \"Ciudad de la Costa\" entradas cobraticket",
+  "cobraticket \"Cruz del Sur\" Giannattasio Ciudad de la Costa",
+  "cobraticket \"Cruz del Sur\" Gianatassio fiesta",
+  "cobraticket \"Cruz del Sur 7130\" Ciudad de la Costa",
   "cobraticket \"Cruz del sur 7030\" San José de Carrasco",
-  "passline fiesta FABRIK \"Ciudad de la Costa\" Uruguay",
+  "fiesta FABRIK \"Ciudad de la Costa\" entradas cobraticket",
   "fiesta liceo FABRIK Ciudad de la Costa entradas 2026",
+  "passline fiesta FABRIK \"Ciudad de la Costa\" Uruguay",
+  "passline \"Cruz del Sur\" Giannattasio Gianattassio Ciudad de la Costa",
+  "passline \"San José de Carrasco\" fiesta",
   "mientrada FABRIK Ciudad de la Costa fiesta",
+  "mientrada \"Cruz del Sur\" Giannattasio Gianattassio Ciudad de la Costa",
+  "mientrada \"San José de Carrasco\" fiesta",
+  "fiesta \"Cruz del Sur\" esquina Giannattasio Ciudad de la Costa entradas",
 ];
 
 const conocidos = new Set([

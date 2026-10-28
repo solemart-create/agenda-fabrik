@@ -236,7 +236,12 @@
     "imagen": "https://files.redtickets.uy/imagenes/d09937d5-3234-4de9-96f1-819956c122da_Event_34352.jpg",
     "entradas": "https://www.redtickets.uy/evento/AFTER-ALL-ALONG-OFICIAL/34352/",
     "notas": "After del domingo a la mañana; en Redtickets figura como Cruz del Sur 7130 esquina Giannastasio.",
-    "otros": [],
+    "otros": [
+      {
+        "nombre": "Agenda Electrónica",
+        "url": "https://agendaelectronica.uy/no-sleep-club-presenta-after-all-along"
+      }
+    ],
     "fuente": "Redtickets",
     "encontrado": "2026-10-28T10:38:32Z",
     "avisado": true

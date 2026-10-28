@@ -52,7 +52,7 @@
     {
       "nombre": "Agenda Electrónica",
       "url": "https://agendaelectronica.uy/",
-      "nota": "Agenda de fiestas electrónicas de Uruguay. Revisar /venues y /explorar buscando Fabrik o la dirección. Agregado por pedido de Soledad (28/10/2026)."
+      "nota": "Agenda de fiestas electrónicas de Uruguay. Fabrik figura como venue 'Cruz del Sur 7130 esq. Giannattasio' (/venues/cruz-del-sur-7130-esq-giannattasio), sin decir Fabrik. Buscar Cruz del Sur + Giannattasio en cualquier orden y con cualquier ortografía."
     }
   ]
 }

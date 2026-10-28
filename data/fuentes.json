@@ -28,7 +28,6 @@
     "site:instagram.com \"cobraticket.uy/e/\" fabrik",
     "\"en fabrik\" fiesta \"ciudad de la costa\"",
     "site:passline.com \"ciudad de la costa\" fabrik",
-    "site:redtickets.net fabrik",
     "site:entraste.com fabrik",
     "site:passline.com fabrik uruguay",
     "site:passline.com \"ciudad de la costa\"",
@@ -42,6 +41,11 @@
     "site:mientrada.com.uy \"San Jose de Carrasco\"",
     "site:mientrada.com.uy \"Gianatassio\"",
     "site:mientrada.com.uy \"Cruz del Sur\"",
-    "site:mientrada.com.uy \"FABRIK\""
+    "site:mientrada.com.uy \"FABRIK\"",
+    "site:redtickets.uy fabrik",
+    "site:redtickets.uy \"ciudad de la costa\"",
+    "site:redtickets.uy \"San José de Carrasco\"",
+    "site:redtickets.uy \"Cruz del Sur\"",
+    "site:redtickets.uy \"Gianattassio\""
   ]
 }

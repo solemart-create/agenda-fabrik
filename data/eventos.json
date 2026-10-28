@@ -222,5 +222,23 @@
     "fuente": "Instagram + Cobraticket",
     "encontrado": "2026-10-21T18:20:00Z",
     "avisado": true
+  },
+  {
+    "id": "red-34352",
+    "titulo": "AFTER ALL ALONG OFICIAL",
+    "fecha": "2026-11-08",
+    "hora": "07:30",
+    "horaFin": "",
+    "lugar": "FABRIK",
+    "direccion": "Cruz del Sur, Esq Gianattassio, Ciudad de la Costa, Canelones",
+    "categoria": "Fiestas",
+    "edad": "",
+    "imagen": "https://files.redtickets.uy/imagenes/d09937d5-3234-4de9-96f1-819956c122da_Event_34352.jpg",
+    "entradas": "https://www.redtickets.uy/evento/AFTER-ALL-ALONG-OFICIAL/34352/",
+    "notas": "After del domingo a la mañana; en Redtickets figura como Cruz del Sur 7130 esquina Giannastasio.",
+    "otros": [],
+    "fuente": "Redtickets",
+    "encontrado": "2026-10-28T10:38:32Z",
+    "avisado": false
   }
 ]
